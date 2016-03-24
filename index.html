@@ -49,11 +49,6 @@
 	</div>
 	<script>
 		window.onscroll = function() {
-					/*if ($(this).scrollTop() > 200) {
-						$('.buttonUp').fadeIn();
-					} else {
-						$('.buttonUp').fadeOut();
-					}*/
 			if(window.pageYOffset > 60) {
 				document.getElementById('menu').style.position='fixed';
 				document.getElementById('menu').style.top='0px';
@@ -61,12 +56,11 @@
 				document.getElementById('menu').style.position='absolute';
 				document.getElementById('menu').style.top='';
 			}
-			};
-			var time=10;
+		};
 			document.getElementById('up').addEventListener("click",function (time, acceleration) {
-	window.scrollTo(0, 0);
-	return false;
-});
+				window.scrollTo(0, 0);
+				return false;
+			});
 	</script>
 </body>
 </html>
