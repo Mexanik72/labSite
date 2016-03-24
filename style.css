@@ -1,0 +1,28 @@
+.header {
+	position: relative;
+	height: 60px;
+	background-color: black;
+}
+
+.header-a {
+	padding: 21px;
+	text-align:center;
+	display: table-cell;
+	vertical-align: middle;
+	text-decoration: none;	
+	color: white;
+}
+
+.header-a:hover {
+    background-color: #424141; 
+}
+
+.menu {
+	margin-top: -16px;
+	width: 200px;
+	background-color:red;
+	height: 500px;
+}
+
+.content {
+}
