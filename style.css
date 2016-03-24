@@ -1,3 +1,6 @@
+body {
+	background: #f0eded;
+}
 .header {
 	position: relative;
 	height: 60px;
@@ -5,24 +8,66 @@
 }
 
 .header-a {
+	float:left;
+}
+.header-a, .header-right{
 	padding: 21px;
 	text-align:center;
-	display: table-cell;
+	vertical-align: middle;
+	text-decoration: none;
+	color: white;
+	
+}
+.header-right {
+	float:right;
+}
+
+.menu-a {
+	text-align:center;
 	vertical-align: middle;
 	text-decoration: none;	
 	color: white;
+	padding-left: 30px;
+	line-height: 40px;
 }
 
-.header-a:hover {
+.header-a:hover, .login:hover {
     background-color: #424141; 
 }
 
-.menu {
-	margin-top: -16px;
+#menu {
 	width: 200px;
-	background-color:red;
-	height: 500px;
+	background-color:#a6a2a2;
+	position: absolute;
+	float: left;
+	height: 100%;
+	top: 60px;
 }
 
 .content {
+	position: relative;
+	margin-left:200px;
+}
+.oneContent {
+	position: relative;
+	margin: 10px;
+	border-top: 2px solid red;
+	padding: 10px;
+	background: white;  
+	box-shadow: 5px 3px 8px -5px #000000;
+}
+
+ul {
+	list-style: none;
+	padding:0px;
+	margin: 0px;
+}
+li:hover {
+	border: 1px solid red;
+	margin:0px;
+}
+.column {
+	position: relative;
+	float: left;
+	width: 33.3%;
 }
