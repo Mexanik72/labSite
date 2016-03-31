@@ -6,6 +6,14 @@ body {
 	max-width: 1600px;
 	margin: 0 auto;
 }
+@media(max-width:768px) {
+	#menu {
+		display:none;
+	}
+	.content {
+		margin-left: 0px !important;
+	}
+}
 .header {
 	position: relative;
 	height: 60px;
