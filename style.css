@@ -1,6 +1,11 @@
 body {
 	background: #f0eded;
 }
+
+#mainDiv {
+	max-width: 1600px;
+	margin: 0 auto;
+}
 .header {
 	position: relative;
 	height: 60px;
