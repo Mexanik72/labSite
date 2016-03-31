@@ -1,0 +1,102 @@
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" href="/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div id="mainDiv">
+		<div class="header">
+			<div class="header-name"><span style="color:red">П</span>опулярное <span style="color:red">Ю</span>туба</div>
+			<a href="" class="header-right login"><i class="fa fa-user"></i> Войти</a>
+			<a href="" class="header-right"><i class="fa fa-plus"></i>Добавить видео</a>
+		</div>
+		<div id="menu">
+			<ul>
+			<li><a href="" class="menu-a">Всё</a></li>
+			<% menu.forEach(function(datum) {%>
+				<li><a href="" class="menu-a"><%= datum.name %></a></li>
+			<% }); %>
+			</ul>
+			<div id="up" class="scrollTop"><a id="toolUp"><img src="http://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w128h1281338911579arrowup2.png"></img></a></div>
+		</div>
+		<div class="content">
+		
+		<div class="column">
+			<% var columnCounter = 0;
+			 data.forEach(function(datum) {
+				if(columnCounter == 0) {%>
+					<div class="oneContent">
+						<div class="name"><b><%=datum.name %></b></div>
+						<iframe src="<%=datum.src %>" frameborder="0" allowfullscreen></iframe>
+						<div class="author"><%=datum.author %></div>
+						<div class="date"><%=datum.date %></div>
+						<div class="description"><%=datum.description %></div>
+					</div>
+			<%	}
+				if(columnCounter == 2) {
+					columnCounter = 0;
+				} else {
+					columnCounter++;
+				}
+			 }); %>
+		</div>
+		<div class="column">
+			<% var columnCounter = 0;
+			 data.forEach(function(datum) {
+				if(columnCounter == 1) {%>
+					<div class="oneContent">
+						<div class="name"><b><%=datum.name %></b></div>
+						<iframe src="<%=datum.src %>" frameborder="0" allowfullscreen></iframe>
+						<div class="author"><%=datum.author %></div>
+						<div class="date"><%=datum.date %></div>
+						<div class="description"><%=datum.description %></div>
+					</div>
+			<%	}
+				if(columnCounter == 3) {
+					columnCounter = 1;
+				} else {
+					columnCounter++;
+				}
+			 }); %>
+		</div>
+		<div class="column">
+			<% var columnCounter = 0;
+			 data.forEach(function(datum) {
+				if(columnCounter == 2) {%>
+					<div class="oneContent">
+						<div class="name"><b><%=datum.name %></b></div>
+						<iframe src="<%=datum.src %>" frameborder="0" allowfullscreen></iframe>
+						<div class="author"><%=datum.author %></div>
+						<div class="date"><%=datum.date %></div>
+						<div class="description"><%=datum.description %></div>
+					</div>
+			<%	}
+				if(columnCounter == 4) {
+					columnCounter = 2;
+				} else {
+					columnCounter++;
+				}
+			 }); %>
+		</div>
+		</div>
+	<script>
+		window.onscroll = function() {
+			if(window.pageYOffset > 60) {
+				document.getElementById('menu').style.position='fixed';
+				document.getElementById('menu').style.top='0px';
+			} else {
+				document.getElementById('menu').style.position='absolute';
+				document.getElementById('menu').style.top='';
+			}
+		};
+			document.getElementById('up').addEventListener("click",function (time, acceleration) {
+				window.scrollTo(0, 0);
+				return false;
+			});
+	</script>
+	</div>
+</body>
+</html>
