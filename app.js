@@ -8,7 +8,6 @@ var http = require("http");
 var https = require("https");
 
 var menu;
-var googleData = ["das", "as", "dssa"];
 app.get('/', function(req, res){
 	db.all('select * from categories', function (error,data){
 		menu = data;
@@ -16,8 +15,21 @@ app.get('/', function(req, res){
 	db.all('select * from content', function (error,data){
 			res.render('home', {
 				data:data,
-				menu:menu
+				menu:menu,
+				current:'/'
 			});
+	});
+});
+app.get('/category', function(req, res){
+	db.all('select * from categories', function (error,data){
+		menu = data;
+	});
+	db.all("select * from content where category="+req.query.id, function (error,data){
+		res.render('home', {
+			data:data,
+			menu:menu,
+			current:'category='+req.query.id
+		});
 	});
 });
 app.post('/remove', function(req, res){

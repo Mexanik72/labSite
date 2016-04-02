@@ -31,61 +31,75 @@
 	</script>
 	<div id="mainDiv">
 		<div class="header">
-			<div class="header-name"><span style="color:red">П</span>опулярное <span style="color:red">Ю</span>туба</div>
+			<a href="/" class="header-name"><span style="color:red">П</span>опулярное <span style="color:red">Ю</span>туба</a>
 			<a href="" class="header-right login"><i class="fa fa-user"></i> Войти</a>
 			<a href="" class="header-right"><i class="fa fa-plus"></i>Добавить видео</a>
 		</div>
 		<div id="menu">
-			<ul>
-			<li><a href="" class="menu-a" id="mr">Всё</a></li>
-			<% menu.forEach(function(datum) {%>
-				<li><a href="" class="menu-a"><%= datum.name %></a></li>
-			<% }); %>
-			</ul>
-			<div id="up" class="scrollTop"><a id="toolUp">
-					<img src="http://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w128h1281338911579arrowup2.png"></img></a>
+			<div class="list">
+				<ul>
+					<% if(current=='/') { %>
+						<li class="current"><a href="/" class="menu-a" id="mr">Всё</a></li>
+					<%} else {%>
+						<li class="current"><a href="/" class="menu-a" id="mr">Всё</a></li>
+					<%}
+						menu.forEach(function(datum) {
+							if(current==datum.name) {%>
+								<li class="current"><a href="" class="menu-a"><%= datum.name %></a></li>
+					<% 		} else { %>
+								<li><a href="category?id=<%= datum.id %>" class="menu-a"><%= datum.name %></a></li>
+					<%		}
+						}); %>
+				</ul>
+				<div id="up" class="scrollTop"><a id="toolUp">
+						<img src="http://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w128h1281338911579arrowup2.png"></img></a>
+				</div>
 			</div>
 		</div>
 		<div class="content">
-			<div id="column1" class="column">
-				<% var columnCounter = 0;
-				 data.forEach(function(datum) {
-					if(columnCounter == 0) {%>
-				<script>sendGet("<%=datum.id%>","<%=datum.src%>",1)</script>
-				<%}
-					if(columnCounter == 2) {
-						columnCounter = 0;
-					} else {
-						columnCounter++;
-					}
-				});%>
-			</div>
-			<div id="column2" class="column">
-				<% var columnCounter = 0;
-				data.forEach(function(datum) {
-				if(columnCounter == 1) {%>
-				<script>sendGet("<%=datum.id%>","<%=datum.src%>",2)</script>
-				<%}
-					if(columnCounter == 3) {
-						columnCounter = 1;
-					} else {
-						columnCounter++;
-					}
-				});%>
-			</div>
-			<div id="column3" class="column">
-				<% var columnCounter = 0;
-				data.forEach(function(datum) {
-				if(columnCounter == 2) {%>
-				<script>sendGet("<%=datum.id%>","<%=datum.src%>",3)</script>
-				<%}
-					if(columnCounter == 4) {
-						columnCounter = 2;
-					} else {
-						columnCounter++;
-					}
-				});%>
-			</div>
+			<%if(data.length !=0) {%>
+				<div id="column1" class="column">
+					<% var columnCounter = 0;
+					 data.forEach(function(datum) {
+						if(columnCounter == 0) {%>
+					<script>sendGet("<%=datum.id%>","<%=datum.src%>",1)</script>
+					<%}
+						if(columnCounter == 2) {
+							columnCounter = 0;
+						} else {
+							columnCounter++;
+						}
+					});%>
+				</div>
+				<div id="column2" class="column">
+					<% var columnCounter = 0;
+					data.forEach(function(datum) {
+					if(columnCounter == 1) {%>
+					<script>sendGet("<%=datum.id%>","<%=datum.src%>",2)</script>
+					<%}
+						if(columnCounter == 3) {
+							columnCounter = 1;
+						} else {
+							columnCounter++;
+						}
+					});%>
+				</div>
+				<div id="column3" class="column">
+					<% var columnCounter = 0;
+					data.forEach(function(datum) {
+					if(columnCounter == 2) {%>
+					<script>sendGet("<%=datum.id%>","<%=datum.src%>",3)</script>
+					<%}
+						if(columnCounter == 4) {
+							columnCounter = 2;
+						} else {
+							columnCounter++;
+						}
+					});%>
+				</div>
+			<%} else {%>
+				<div>No content</div>
+			<%}%>
 		</div>
 		<script>
 			window.onscroll = function() {
