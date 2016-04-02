@@ -28,7 +28,7 @@ app.get('/category', function(req, res){
 		res.render('home', {
 			data:data,
 			menu:menu,
-			current:'category='+req.query.id
+			current:req.query.id
 		});
 	});
 });

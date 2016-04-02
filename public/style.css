@@ -69,7 +69,7 @@ body {
 	float: left;
 	height: 100%;
 }
-.list {
+#list {
 	margin-top:80px;
 }
 .content {
@@ -153,6 +153,8 @@ li:hover {
 	vertical-align: middle;
 	color: white;
 	line-height: 40px;
+	background-color:#404040;
+	padding-top:50px;
 }
 #upB {
 	width: 50px;
