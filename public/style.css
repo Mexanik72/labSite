@@ -58,7 +58,7 @@ body {
 	line-height: 40px;
 }
 
-.header-a:hover, .login:hover, .header-right:hover {
+.header-a:hover, .login:hover {
     background-color: #424141; 
 }
 
@@ -159,4 +159,24 @@ li:hover {
 #upB {
 	width: 50px;
 	height:50px;
+}
+
+#menu_2 {
+	position: absolute;
+	right: 70px;
+	top:60px;
+	z-index:50;
+	background-color: #424141;
+	width: 200px;
+	padding: 5px;
+}
+
+label {
+	color: white;
+}
+#inputUrl {
+	margin-bottom: 10px;
+}
+#selectCategory {
+	margin-bottom: 10px;
 }

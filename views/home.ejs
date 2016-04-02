@@ -33,7 +33,19 @@
 		<div class="header">
 			<a href="/" class="header-name"><span style="color:red">П</span>опулярное <span style="color:red">Ю</span>туба</a>
 			<a href="" class="header-right login"><i class="fa fa-user"></i> Войти</a>
-			<a href="" class="header-right"><i class="fa fa-plus"></i>Добавить видео</a>
+			<div id="addVideo" onmouseover="overHeader()" onmouseout="outHeader()">
+				<div id="headerAdd" class="header-right"><i class="fa fa-plus"></i>Добавить видео</div>
+				<div id="menu_2" style="display: none">
+					<label for="inputUrl">Ссылка на видео:</label><input type="text" maxlength="200" id="inputUrl">
+					<label>Категория:</label>
+					<select id="selectCategory">
+						<%menu.forEach(function(datum) {%>
+						<option value="<%= datum.id %>"><%= datum.name %></option>
+						<%});%>
+					</select>
+					<input type="submit" value="Добавить видео" onclick="postData()">
+				</div>
+			</div>
 		</div>
 		<div id="menu">
 			<div id="list">
@@ -178,6 +190,38 @@
 				request.open('POST', '/remove?id='+id);
 				request.send();
 				document.getElementById('oneContent'+id).remove();
+			}
+			function overHeader() {
+				document.getElementById('menu_2').setAttribute('style', 'display:block');
+				document.getElementById('headerAdd').setAttribute('style', 'background-color: #424141');
+			}
+			function outHeader() {
+				document.getElementById('menu_2').setAttribute('style', 'display:none');
+				document.getElementById('headerAdd').setAttribute('style', 'background-color: black');
+			}
+			function postData() {
+				var src = document.getElementById('inputUrl').value.split("=", 2);
+				if (src[0] != "http://www.youtube.com/watch?v") {
+					alert("Введен неверный адресс! Введите либо скопируйте коррестный url адресс. Пример: http://www.youtube.com/watch?v=id");
+				} else {
+					var category = document.getElementById('selectCategory').value;
+					var request = new XMLHttpRequest();
+					request.open('POST', '/new?src=' + src[1] + '&category=' + category);
+					request.send();
+					var id = getLastAddedKey();
+					sendGet(id, src[1], document.getElementsByClassName('oneContent').length % 3 + 1);
+				}
+			}
+			function getLastAddedKey() {
+				var request = new XMLHttpRequest();
+				request.open('GET', '/getLastAddedKey',true);
+				request.send();
+				if (request.status != 200) {
+					console.log(request.status + ': ' + request.statusText);
+					return;
+				} else {
+					return JSON.parse(request.response).id;
+				}
 			}
 		</script>
 	</div>

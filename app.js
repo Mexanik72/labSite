@@ -32,6 +32,23 @@ app.get('/category', function(req, res){
 		});
 	});
 });
+
+app.post('/new', function(req, res){
+	db.run("insert into content (src, category) values('"+req.query.src+"',"+req.query.category+");", function (){
+		res.send('ok');
+	});
+});
+
+app.get('/getLastAddedKey', function(req, res) {
+	var execquery = 'SELECT id FROM content ORDER BY id DESC LIMIT 0,1';
+	db.get(execquery, [] ,
+		function(err, row) {
+			res.end(JSON.stringify({ id: row.id }));
+		}
+	);
+});
+
+
 app.post('/remove', function(req, res){
 	db.run("delete from content where id ="+req.query.id, function (){
 		console.log("remove"+req.query.id)
