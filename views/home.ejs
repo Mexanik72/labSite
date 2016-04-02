@@ -7,6 +7,28 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body>
+<script>
+
+		function sendGet(id, src, position) {
+			var request = new XMLHttpRequest();
+			var data = {};
+			request.open('GET', 'https://www.googleapis.com/youtube/v3/videos?part=statistics%2C+snippet&id='+src+'&key=AIzaSyAUfxM0Xz-yoX8k2XecobWtQRb2Kbu49S0', true);
+
+			request.onload = function() {
+			  if (request.status >= 200 && request.status < 400) {
+				  // Success!
+				  data = JSON.parse(request.responseText);
+				  addElement(id, data, position);
+			  }
+			};
+
+			request.onerror = function() {
+			  // There was a connection error of some sort
+			};
+
+			request.send();
+		}
+	</script>
 	<div id="mainDiv">
 		<div class="header">
 			<div class="header-name"><span style="color:red">П</span>опулярное <span style="color:red">Ю</span>туба</div>
@@ -15,88 +37,126 @@
 		</div>
 		<div id="menu">
 			<ul>
-			<li><a href="" class="menu-a">Всё</a></li>
+			<li><a href="" class="menu-a" id="mr">Всё</a></li>
 			<% menu.forEach(function(datum) {%>
 				<li><a href="" class="menu-a"><%= datum.name %></a></li>
 			<% }); %>
 			</ul>
-			<div id="up" class="scrollTop"><a id="toolUp"><img src="http://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w128h1281338911579arrowup2.png"></img></a></div>
+			<div id="up" class="scrollTop"><a id="toolUp">
+					<img src="http://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w128h1281338911579arrowup2.png"></img></a>
+			</div>
 		</div>
 		<div class="content">
-		
-		<div class="column">
-			<% var columnCounter = 0;
-			 data.forEach(function(datum) {
-				if(columnCounter == 0) {%>
-					<div class="oneContent">
-						<div class="name"><b><%=datum.name %></b></div>
-						<iframe src="<%=datum.src %>" frameborder="0" allowfullscreen></iframe>
-						<div class="author"><%=datum.author %></div>
-						<div class="date"><%=datum.date %></div>
-						<div class="description"><%=datum.description %></div>
-					</div>
-			<%	}
-				if(columnCounter == 2) {
-					columnCounter = 0;
-				} else {
-					columnCounter++;
-				}
-			 }); %>
-		</div>
-		<div class="column">
-			<% var columnCounter = 0;
-			 data.forEach(function(datum) {
+			<div id="column1" class="column">
+				<% var columnCounter = 0;
+				 data.forEach(function(datum) {
+					if(columnCounter == 0) {%>
+				<script>sendGet("<%=datum.id%>","<%=datum.src%>",1)</script>
+				<%}
+					if(columnCounter == 2) {
+						columnCounter = 0;
+					} else {
+						columnCounter++;
+					}
+				});%>
+			</div>
+			<div id="column2" class="column">
+				<% var columnCounter = 0;
+				data.forEach(function(datum) {
 				if(columnCounter == 1) {%>
-					<div class="oneContent">
-						<div class="name"><b><%=datum.name %></b></div>
-						<iframe src="<%=datum.src %>" frameborder="0" allowfullscreen></iframe>
-						<div class="author"><%=datum.author %></div>
-						<div class="date"><%=datum.date %></div>
-						<div class="description"><%=datum.description %></div>
-					</div>
-			<%	}
-				if(columnCounter == 3) {
-					columnCounter = 1;
-				} else {
-					columnCounter++;
-				}
-			 }); %>
-		</div>
-		<div class="column">
-			<% var columnCounter = 0;
-			 data.forEach(function(datum) {
+				<script>sendGet("<%=datum.id%>","<%=datum.src%>",2)</script>
+				<%}
+					if(columnCounter == 3) {
+						columnCounter = 1;
+					} else {
+						columnCounter++;
+					}
+				});%>
+			</div>
+			<div id="column3" class="column">
+				<% var columnCounter = 0;
+				data.forEach(function(datum) {
 				if(columnCounter == 2) {%>
-					<div class="oneContent">
-						<div class="name"><b><%=datum.name %></b></div>
-						<iframe src="<%=datum.src %>" frameborder="0" allowfullscreen></iframe>
-						<div class="author"><%=datum.author %></div>
-						<div class="date"><%=datum.date %></div>
-						<div class="description"><%=datum.description %></div>
-					</div>
-			<%	}
-				if(columnCounter == 4) {
-					columnCounter = 2;
+				<script>sendGet("<%=datum.id%>","<%=datum.src%>",3)</script>
+				<%}
+					if(columnCounter == 4) {
+						columnCounter = 2;
+					} else {
+						columnCounter++;
+					}
+				});%>
+			</div>
+		</div>
+		<script>
+			window.onscroll = function() {
+				if(window.pageYOffset > 60) {
+					document.getElementById('menu').style.position='fixed';
+					document.getElementById('menu').style.top='0px';
 				} else {
-					columnCounter++;
+					document.getElementById('menu').style.position='absolute';
+					document.getElementById('menu').style.top='';
 				}
-			 }); %>
-		</div>
-		</div>
-	<script>
-		window.onscroll = function() {
-			if(window.pageYOffset > 60) {
-				document.getElementById('menu').style.position='fixed';
-				document.getElementById('menu').style.top='0px';
-			} else {
-				document.getElementById('menu').style.position='absolute';
-				document.getElementById('menu').style.top='';
-			}
-		};
+			};
 			document.getElementById('up').addEventListener("click",function (time, acceleration) {
 				window.scrollTo(0, 0);
 				return false;
 			});
-	</script>
+			function addElement(id, data, position) {
+				var newDiv = document.createElement('div');
+				newDiv.setAttribute('id','oneContent'+id);
+				newDiv.setAttribute('class','oneContent');
+				newDiv.setAttribute('onmouseover',"over('rem"+id+"')");
+				newDiv.setAttribute('onmouseout',"out('rem"+id+"')");
+				document.getElementById('column'+position).appendChild(newDiv);
+
+				var name = document.createElement('div');
+				//newDiv.setAttribute('id','content'+id);
+				name.setAttribute('class','name');
+				name.innerHTML = '<b>'+data.items[0].snippet.title+'</b>';
+
+				var src = document.createElement('iframe');
+				src.setAttribute('src','https://www.youtube.com/embed/'+data.items[0].id);
+				src.setAttribute('frameborder','0');
+				src.setAttribute('allowfullscreen','');
+
+				var author = document.createElement('div');
+				author.setAttribute('class','author');
+				author.innerHTML = '<b>'+data.items[0].snippet.channelTitle+'</b>';
+
+				var views = document.createElement('div');
+				views.setAttribute('class','views');
+				views.innerHTML = '<i class="fa fa-eye"></i>'+data.items[0].statistics.viewCount;
+
+				var description = document.createElement('div');
+				description.setAttribute('class','views');
+				description.innerHTML = data.items[0].snippet.description;
+
+				var remove = document.createElement('div');
+				remove.setAttribute('id','rem'+id);
+				remove.setAttribute('class','remove');
+				remove.setAttribute('style','display:none');
+				remove.innerHTML = '<a href="" onclick="removeVideo('+id+')">x</a>';
+
+				newDiv.appendChild(name);
+				newDiv.appendChild(src);
+				newDiv.appendChild(author);
+				newDiv.appendChild(views);
+				newDiv.appendChild(remove);
+				//newDiv.appendChild(description);
+			}
+			function over(id) {
+				document.getElementById(id).setAttribute('style', 'display:block');
+			}
+			function out(id) {
+				document.getElementById(id).setAttribute('style', 'display:none');
+			}
+			function removeVideo(id) {
+				var request = new XMLHttpRequest();
+				request.open('POST', '/remove?id='+id);
+				request.send();
+				document.getElementById('oneContent'+id).remove();
+			}
+		</script>
 	</div>
 </body>
 </html>

@@ -83,21 +83,35 @@ iframe {
 .name {
 	font-size: large;
 	margin-bottom: 3px;
+	margin-left:2%;
 }
 .author {
-	width:69%;
-	position:relative;
+	position: relative;
 	float:left;
 	color: #303030;
 	margin-left:2%;
+	width: 96%;
+	margin-bottom: 3px;
 }
 
 .date {
-	width:35%;
+	width:48%;
 	position:relative;
 	margin-left:70%;
 	font-size: small;
 	color: #808080;
+}
+.views {
+	position: relative;
+	color: #808080;
+	margin-left: 2%;
+	margin-right: 2%;
+}
+.remove, .remove a {
+	position: absolute;
+	right: 5px;
+	top:5px;
+	text-decoration: none;
 }
 .description {
 	overflow: hidden;
