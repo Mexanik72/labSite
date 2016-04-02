@@ -6,9 +6,9 @@ body {
 	max-width: 1600px;
 	margin: 0 auto;
 }
-iframe {
+.youTubeVideo {
 	width:96%;
-	height: 200px;
+	height: 180px;
 	margin-left: 2%;
 	margin-bottom:5px;
 }
@@ -154,7 +154,7 @@ li:hover {
 	color: white;
 	line-height: 40px;
 }
-img {
+#upB {
 	width: 50px;
 	height:50px;
 }

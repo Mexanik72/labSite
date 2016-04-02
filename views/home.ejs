@@ -52,7 +52,7 @@
 						}); %>
 				</ul>
 				<div id="up" class="scrollTop"><a id="toolUp">
-						<img src="http://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w128h1281338911579arrowup2.png"></img></a>
+						<img id="upB" src="http://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w128h1281338911579arrowup2.png"></img></a>
 				</div>
 			</div>
 		</div>
@@ -128,10 +128,17 @@
 				name.setAttribute('class','name');
 				name.innerHTML = '<b>'+data.items[0].snippet.title+'</b>';
 
-				var src = document.createElement('iframe');
+				/*var src = document.createElement('iframe');
 				src.setAttribute('src','https://www.youtube.com/embed/'+data.items[0].id);
 				src.setAttribute('frameborder','0');
-				src.setAttribute('allowfullscreen','');
+				src.setAttribute('allowfullscreen','');*/
+
+				var a = document.createElement('a');
+				a.setAttribute('href', 'https://www.youtube.com/watch?v='+data.items[0].id);
+				var img = document.createElement('img');
+				img.setAttribute('class', 'youTubeVideo');
+				img.setAttribute('src', data.items[0].snippet.thumbnails.medium.url);
+				a.appendChild(img)
 
 				var author = document.createElement('div');
 				author.setAttribute('class','author');
@@ -152,7 +159,7 @@
 				remove.innerHTML = '<a href="" onclick="removeVideo('+id+')">x</a>';
 
 				newDiv.appendChild(name);
-				newDiv.appendChild(src);
+				newDiv.appendChild(a);
 				newDiv.appendChild(author);
 				newDiv.appendChild(views);
 				newDiv.appendChild(remove);
