@@ -1,0 +1,16 @@
+{
+  "name": "labSite",
+  "scripts": {
+    "postdeploy": "app.js"
+  },
+  "env": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
