@@ -1,7 +1,8 @@
 {
   "name": "labSite",
   "scripts": {
-    "postdeploy": "app.js"
+    "postdeploy": "app.js",
+    "start": "node app.js"
   },
   "env": {
   },
